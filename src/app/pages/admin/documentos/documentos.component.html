@@ -1,0 +1,124 @@
+<div class="card-body ">
+  <mat-card-title class="titulo"> Carga de Documentos </mat-card-title>
+
+
+  <!-- Button trigger Ingreso de Informacion -->
+  <button mat-raised-button type="button" class="botones mt-4 mb-4" data-bs-toggle="modal"
+    data-bs-target="#staticAgregar">
+    <mat-icon>add_circle_outline</mat-icon>
+    Carga
+  </button>
+
+</div>
+
+<div class="container-fluid">
+  <div class="container-fluid">
+    <mat-form-field>
+      <mat-label>Busqueda</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSourceEventos" matSort>
+        <!-- Column ID punto de atención -->
+        <ng-container matColumnDef="regionPatencion">
+          <th mat-header-cell *matHeaderCellDef class="headerTable" mat-sort-header> Región </th>
+          <td mat-cell *matCellDef="let row"> {{row.regionPatencion}} </td>
+        </ng-container>
+
+        <!-- Column ID punto de atención -->
+        <ng-container matColumnDef="dpiUsuario">
+          <th mat-header-cell *matHeaderCellDef class="headerTable" mat-sort-header> Dpi </th>
+          <td mat-cell *matCellDef="let row"> {{row.dpiUsuario}} </td>
+        </ng-container>
+
+        <!--Column region de atención-->
+        <ng-container matColumnDef="nombreUsuarioAtencion">
+          <th mat-header-cell *matHeaderCellDef class="headerTable" mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.nombreUsuarioAtencion}}</td>
+        </ng-container>
+
+        <!-- Column nombre punto de atención-->
+        <ng-container matColumnDef="codigoCargo">
+          <th mat-header-cell *matHeaderCellDef class="headerTable" mat-sort-header> Cargo </th>
+          <td mat-cell *matCellDef="let row"> {{row.codigoCargo}} </td>
+        </ng-container>
+
+        <!-- Columna Acción -->
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef class="headerTable" class="headerTable"> Acción </th>
+          <td mat-cell *matCellDef="let evento" class="accion">
+            <span class="material-icons" title="Ver más" data-bs-toggle="modal" data-bs-target="#staticDetalleEventos"
+              style="cursor: pointer;">visibility</span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="eventoColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: eventoColumns;"></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay datos correspondientes a "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="staticAgregar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header titulo">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar</h5>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="agregarForm">
+
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>No. Documento</mat-label>
+                <input matInput formControlName="numeroDocumento" matInput placeholder="Numero Documento`"
+                  maxlength="16" autocomplete="off">
+                <mat-hint align="end">{{agregarForm.controls.numeroDocumento.value?.length || 0}}/16
+                </mat-hint>
+                <mat-error *ngIf="agregarForm.controls.numeroDocumento.hasError('required')">
+                  Numero de documento requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Propietario</mat-label>
+                <input matInput #nombre formControlName="propietario" placeholder="Propietario" maxlength="225"
+                  autocomplete="off">
+                <mat-hint align="end">{{agregarForm.controls.propietario.value?.length ||
+                  0}}/225</mat-hint>
+                <mat-error *ngIf="agregarForm.controls.propietario.hasError('required')">
+                  Propietario</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btnCancelar" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" data-bs-dismiss="modal" class="btnGuardar">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
