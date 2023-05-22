@@ -48,14 +48,7 @@ export class LoginComponent implements OnInit {
             
             if (this.loginService.getUserRol() == 'ADMIN') {
               this.router.navigate(['admin']);
-              this.loginService.loginStatusSubjec.next(true);
-
-            } else if (this.loginService.getUserRol() == 'USUARIO') {
-              this.router.navigate(['user-dashboard']);
-              this.loginService.loginStatusSubjec.next(true);
-            }else if(this.loginService.getUserRol() == 'CUENTAHABIENTE'){
-              this.router.navigate(['cuentahabiente-dashboard']);
-              this.loginService.loginStatusSubjec.next(true);
+              this.loginService.loginStatusSubjec.next(true);             
             } else {
               this.snack.open("Usario no encontrado", "OK", {
                 duration: 3000

@@ -110,3 +110,38 @@
     border-radius: 20px;
     opacity: 1;
 }
+
+/* Importar los estilos de Angular Material */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Estilos personalizados */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.file-input {
+  margin-bottom: 20px;
+}
+
+.file-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.file-name {
+  margin-left: 10px;
+}
+
+.remove-button {
+  margin-left: 10px;
+}

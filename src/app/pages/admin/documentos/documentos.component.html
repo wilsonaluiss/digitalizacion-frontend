@@ -77,19 +77,7 @@
       <div class="modal-body">
         <form [formGroup]="agregarForm">
 
-          <div class="row">
-            <div class="col-6">
-              <mat-form-field appearance="outline">
-                <mat-label>No. Documento</mat-label>
-                <input matInput formControlName="numeroDocumento" matInput placeholder="Numero Documento`"
-                  maxlength="16" autocomplete="off">
-                <mat-hint align="end">{{agregarForm.controls.numeroDocumento.value?.length || 0}}/16
-                </mat-hint>
-                <mat-error *ngIf="agregarForm.controls.numeroDocumento.hasError('required')">
-                  Numero de documento requerido
-                </mat-error>
-              </mat-form-field>
-            </div>
+          <div class="row">          
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Propietario</mat-label>
@@ -106,18 +94,32 @@
             <div class="col-6">
               <mat-form-field appearance="outline">
                 <mat-label>Choose a date</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput formControlName="fechaElaboracion" [matDatepicker]="picker">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
           </div>
+          <div class="container">
+            <div class="file-input">
+              <input type="file" multiple (change)="onFilesSelected($event)">
+            </div>
+
+            <ul class="file-list">
+              <li class="file-item" *ngFor="let file of selectedFiles; let i = index">
+                <span class="file-name">{{ getFileName(file) }}</span>
+                <button class="remove-button" mat-icon-button color="warn" (click)="removeFile(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </li>
+            </ul>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btnCancelar" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" data-bs-dismiss="modal" class="btnGuardar">Guardar</button>
+        <button type="button" data-bs-dismiss="modal" class="btnGuardar" (click)="guardar()">Guardar</button>
       </div>
     </div>
   </div>

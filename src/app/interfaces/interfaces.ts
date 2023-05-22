@@ -1,5 +1,6 @@
 export interface documento{
-    propietario: string,
+    propietario: string,    
+    usuario_Creacion : Number,
     fecha: Date,
-    documento : Blob[]
+    documento : any[]
 }
