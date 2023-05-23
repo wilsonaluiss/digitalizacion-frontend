@@ -52,7 +52,6 @@ export class DocumentosComponent implements OnInit {
   selectedFiles: any[];
 
   guardar() {
-
     if (this.agregarForm.valid && this.selectedFiles.length > 0) {
       const formData = new FormData();
 
@@ -100,8 +99,7 @@ export class DocumentosComponent implements OnInit {
   }
 
   getFileName(file: File): string {
-      return file.name;
-   
+      return file.name;   
   }
   
 }
